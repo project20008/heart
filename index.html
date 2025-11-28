@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Здоровье в капсуле | Полезные вещества</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .tab {
+            background-color: white;
+            border-radius: 50px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 150px;
+            max-width: 200px;
+            justify-content: center;
+        }
+
+        .tab:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+        }
+
+        .content {
+            display: none;
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 15px;
+        }
+
+        .content-icon {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            border-radius: 50%;
+            color: white;
+        }
+
+        .content-title {
+            font-size: 1.8rem;
+            color: #2E7D32;
+        }
+
+        .content-text {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefits-list {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+
+        .benefits-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .benefits-list li:before {
+            content: "✓";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .foods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .food-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .food-item:hover {
+            transform: translateY(-5px);
+            background-color: #f0f0f0;
+        }
+
+        .food-emoji {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .food-name {
+            font-weight: 600;
+            color: #2E7D32;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: #2E7D32;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        /* Адаптация для мобильных устройств */
+        @media (max-width: 768px) {
+            .tabs {
+                gap: 8px;
+            }
+            
+            .tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+                min-width: 120px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .foods-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            
+            .content-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .foods-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .content-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ЗДОРОВЬЕ В КАПСУЛЕ</h1>
+        <p class="subtitle">Полезные вещества для вашего организма</p>
+    </header>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="magnesium">
+            <span class="tab-icon"><i class="fas fa-leaf"></i></span>
+            Магний
+        </div>
+        <div class="tab" data-tab="calcium">
+            <span class="tab-icon"><i class="fas fa-bone"></i></span>
+            Кальций
+        </div>
+        <div class="tab" data-tab="iron">
+            <span class="tab-icon"><i class="fas fa-tint"></i></span>
+            Железо
+        </div>
+        <div class="tab" data-tab="vitaminc">
+            <span class="tab-icon"><i class="fas fa-lemon"></i></span>
+            Витамин C
+        </div>
+        <div class="tab" data-tab="protein">
+            <span class="tab-icon"><i class="fas fa-dumbbell"></i></span>
+            Белок
+        </div>
+        <div class="tab" data-tab="omega3">
+            <span class="tab-icon"><i class="fas fa-fish"></i></span>
+            Омега-3
+        </div>
+        <div class="tab" data-tab="zinc">
+            <span class="tab-icon"><i class="fas fa-shield-alt"></i></span>
+            Цинк
+        </div>
+    </div>
+
+    <!-- Магний -->
+    <div class="content active" id="magnesium">
+        <div class="content-header">
+            <div class="content-icon"><i class="fas fa-leaf"></i></div>
+            <h2 class="content-title">Магний</h2>
+        </div>
+        <p class="content-text">Магний — один из важнейших минералов для нашего организма. Он участвует в более чем 300 биохимических реакциях, включая производство энергии, синтез белков и ДНК.</p>
+        <h3>Польза для здоровья:</h3>
+        <ul class="benefits-list">
+            <li>Поддерживает здоровье нервной системы</li>
+            <li>Регулирует мышечные сокращения</li>
+            <li>Укрепляет кости и зубы</li>
+            <li>Поддерживает здоровый сердечный ритм</li>
+            <li>Помогает снизить стресс и улучшить сон</li>
+        </ul>
+        <h3>Продукты, богатые магнием:</h3>
+        <div class="foods-grid">
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Орехи</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-leaf"></i></div>
+                <div class="food-name">Шпинат</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Бобовые</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-bread-slice"></i></div>
+                <div class="food-name">Цельнозерновые</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Кальций -->
+    <div class="content" id="calcium">
+        <div class="content-header">
+            <div class="content-icon"><i class="fas fa-bone"></i></div>
+            <h2 class="content-title">Кальций</h2>
+        </div>
+        <p class="content-text">Кальций — самый распространенный минерал в организме человека, необходимый для здоровья костей, зубов, а также для нормального функционирования нервной системы и мышц.</p>
+        <h3>Польза для здоровья:</h3>
+        <ul class="benefits-list">
+            <li>Укрепляет кости и зубы</li>
+            <li>Поддерживает здоровье нервной системы</li>
+            <li>Регулирует мышечные сокращения</li>
+            <li>Участвует в свертывании крови</li>
+            <li>Поддерживает сердечный ритм</li>
+        </ul>
+        <h3>Продукты, богатые кальцием:</h3>
+        <div class="foods-grid">
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-cheese"></i></div>
+                <div class="food-name">Молочные продукты</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-leaf"></i></div>
+                <div class="food-name">Брокколи</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Миндаль</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-fish"></i></div>
+                <div class="food-name">Сардины</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Железо -->
+    <div class="content" id="iron">
+        <div class="content-header">
+            <div class="content-icon"><i class="fas fa-tint"></i></div>
+            <h2 class="content-title">Железо</h2>
+        </div>
+        <p class="content-text">Железо — важный минерал, необходимый для производства гемоглобина, который переносит кислород по всему организму.</p>
+        <h3>Польза для здоровья:</h3>
+        <ul class="benefits-list">
+            <li>Предотвращает анемию</li>
+            <li>Улучшает когнитивные функции</li>
+            <li>Поддерживает иммунную систему</li>
+            <li>Помогает регулировать температуру тела</li>
+            <li>Участвует в производстве энергии</li>
+        </ul>
+        <h3>Продукты, богатые железом:</h3>
+        <div class="foods-grid">
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-drumstick-bite"></i></div>
+                <div class="food-name">Красное мясо</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Чечевица</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-leaf"></i></div>
+                <div class="food-name">Шпинат</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-cube"></i></div>
+                <div class="food-name">Тофу</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Витамин C -->
+    <div class="content" id="vitaminc">
+        <div class="content-header">
+            <div class="content-icon"><i class="fas fa-lemon"></i></div>
+            <h2 class="content-title">Витамин C</h2>
+        </div>
+        <p class="content-text">Витамин C — мощный антиоксидант, который помогает защитить клетки от повреждений, поддерживает иммунную систему и способствует усвоению железа.</p>
+        <h3>Польза для здоровья:</h3>
+        <ul class="benefits-list">
+            <li>Укрепляет иммунную систему</li>
+            <li>Способствует здоровью кожи</li>
+            <li>Ускоряет заживление ран</li>
+            <li>Защищает от сердечно-сосудистых заболеваний</li>
+            <li>Улучшает усвоение железа</li>
+        </ul>
+        <h3>Продукты, богатые витамином C:</h3>
+        <div class="foods-grid">
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-lemon"></i></div>
+                <div class="food-name">Цитрусовые</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-kiwi-bird"></i></div>
+                <div class="food-name">Киви</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-pepper-hot"></i></div>
+                <div class="food-name">Болгарский перец</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-stroopwafel"></i></div>
+                <div class="food-name">Клубника</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Белок -->
+    <div class="content" id="protein">
+        <div class="content-header">
+            <div class="content-icon"><i class="fas fa-dumbbell"></i></div>
+            <h2 class="content-title">Белок</h2>
+        </div>
+        <p class="content-text">Белок — это макроэлемент, необходимый для построения и восстановления тканей организма, производства ферментов и гормонов, а также для поддержания мышечной массы.</p>
+        <h3>Польза для здоровья:</h3>
+        <ul class="benefits-list">
+            <li>Строит и восстанавливает ткани</li>
+            <li>Поддерживает мышечную массу</li>
+            <li>Укрепляет иммунную систему</li>
+            <li>Обеспечивает чувство сытости</li>
+            <li>Участвует в производстве гормонов и ферментов</li>
+        </ul>
+        <h3>Продукты, богатые белком:</h3>
+        <div class="foods-grid">
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-drumstick-bite"></i></div>
+                <div class="food-name">Куриная грудка</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Чечевица</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-cheese"></i></div>
+                <div class="food-name">Греческий йогурт</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-egg"></i></div>
+                <div class="food-name">Яйца</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Омега-3 -->
+    <div class="content" id="omega3">
+        <div class="content-header">
+            <div class="content-icon"><i class="fas fa-fish"></i></div>
+            <h2 class="content-title">Омега-3</h2>
+        </div>
+        <p class="content-text">Омега-3 — это незаменимые жирные кислоты, которые играют важную роль в функционировании мозга, а также в нормальном росте и развитии организма.</p>
+        <h3>Польза для здоровья:</h3>
+        <ul class="benefits-list">
+            <li>Улучшает здоровье сердца</li>
+            <li>Поддерживает функцию мозга</li>
+            <li>Снижает воспаление в организме</li>
+            <li>Улучшает здоровье глаз</li>
+            <li>Поддерживает психическое здоровье</li>
+        </ul>
+        <h3>Продукты, богатые омега-3:</h3>
+        <div class="foods-grid">
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-fish"></i></div>
+                <div class="food-name">Лосось</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Грецкие орехи</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Семена льна</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-fish"></i></div>
+                <div class="food-name">Скумбрия</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Цинк -->
+    <div class="content" id="zinc">
+        <div class="content-header">
+            <div class="content-icon"><i class="fas fa-shield-alt"></i></div>
+            <h2 class="content-title">Цинк</h2>
+        </div>
+        <p class="content-text">Цинк — важный минерал, который играет ключевую роль в иммунной функции, заживлении ран, синтезе белка и делении клеток.</p>
+        <h3>Польза для здоровья:</h3>
+        <ul class="benefits-list">
+            <li>Укрепляет иммунную систему</li>
+            <li>Ускоряет заживление ран</li>
+            <li>Поддерживает здоровье кожи</li>
+            <li>Участвует в синтезе ДНК</li>
+            <li>Поддерживает обоняние и вкус</li>
+        </ul>
+        <h3>Продукты, богатые цинком:</h3>
+        <div class="foods-grid">
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-drumstick-bite"></i></div>
+                <div class="food-name">Говядина</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Тыквенные семечки</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-seedling"></i></div>
+                <div class="food-name">Нут</div>
+            </div>
+            <div class="food-item">
+                <div class="food-emoji"><i class="fas fa-cheese"></i></div>
+                <div class="food-name">Молочные продукты</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Разработчик: Сечинова Дарья Викторовна 10 «Б» МАОУ СОШ №1 с. Александровское. Все права защищены.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Убираем активный класс у всех вкладок и контента
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+                    
+                    // Добавляем активный класс текущей вкладке и соответствующему контенту
+                    this.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
